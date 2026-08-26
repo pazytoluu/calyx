@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Connexion | Calyx Solution Client</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="brand">
+            <h1 class="logo">calyx</h1>
+            <p class="tagline">solutions client pour courtiers d'assurance</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="{{ url_for('index') }}#presentation">Présentation</a></li>
+                <li><a href="{{ url_for('index') }}#services">Services</a></li>
+                <li><a href="{{ url_for('index') }}#contact">Contact</a></li>
+                <li><a href="{{ url_for('register') }}">Inscription</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <section class="section">
+        <div class="container" style="max-width: 420px;">
+            <h2 class="text-center">Connexion</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages" style="margin-bottom: 20px;">
+                {% for category, message in messages %}
+                <p class="text-small"
+                   style="
+                                   padding: 12px 16px;
+                                   border-radius: 6px;
+                                   margin: 0 0 8px;
+                                   {% if category == 'error' %}
+                                       background: #fdecea;
+                                       color: #c0392b;
+                                   {% else %}
+                                       background: #e9ecfb;
+                                       color: #2b4fe4;
+                                   {% endif %}
+                               ">
+                    {{ message }}
+                </p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('login') }}" method="POST" novalidate>
+
+                <div class="form-group">
+                    <label for="email">Adresse email</label>
+                    <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            placeholder="vous@exemple.com"
+                            autocomplete="username"
+                    >
+                    <p class="text-small" id="email-error" style="color: #c0392b; display: none;">
+                        Merci de saisir une adresse email valide.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            minlength="8"
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}"
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                    >
+                    <p class="text-small" id="password-error" style="color: #c0392b; display: none;">
+                        8 caractères minimum, avec au moins une majuscule,
+                        une minuscule, un chiffre et un caractère spécial.
+                    </p>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%;">Se connecter</button>
+
+            </form>
+        </div>
+    </section>
+</main>
+
+<script>
+    const form = document.querySelector("form");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const emailError = document.getElementById("email-error");
+    const passwordError = document.getElementById("password-error");
+
+    function validateEmail() {
+        const valid = emailInput.checkValidity();
+        emailError.style.display = valid ? "none" : "block";
+        return valid;
+    }
+
+    function validatePassword() {
+        const valid = passwordInput.checkValidity();
+        passwordError.style.display = valid ? "none" : "block";
+        return valid;
+    }
+
+    emailInput.addEventListener("blur", validateEmail);
+    passwordInput.addEventListener("blur", validatePassword);
+
+    form.addEventListener("submit", function (e) {
+        const emailValid = validateEmail();
+        const passwordValid = validatePassword();
+        if (!emailValid || !passwordValid) {
+            e.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>

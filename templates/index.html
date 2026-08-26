@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accueil | Calyx Solution Client</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="brand">
+            <h1 class="logo">calyx</h1>
+            <p class="tagline">solutions client pour courtiers d'assurance</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="{{ / }}#presentation">Présentation</a></li>
+                <li><a href="{{ / }}#services">Services</a></li>
+                <li><a href="{{ / }}#contact">Contact</a></li>
+                <li><a href="{{ /connexion }}">Connexion</a></li>
+                <li><a href="{{/inscription }}">Inscription</a></li>
+            </ul>
+        </nav>
+    </div> 
+</header>
+
+<main>
+
+    <section id="presentation" class="section">
+        <div class="container">
+            <h2>Pourquoi choisir Calyx ?</h2>
+            <p>
+                Calyx est une Solution Client pour Courtier d'Assurance, elle
+                s'adresse aux professionnels qui veulent mieux gérer les
+                situations clients sensibles sans improvisation, sans
+                rigidité inutile et sans perte de temps évitable.
+            </p>
+
+            <div class="grid grid-4" style="margin-top: 40px;">
+                <div class="card card-tint-1">
+                    <h5>Approche Structurée</h5>
+                    <p>
+                        Une méthodologie rigoureuse pour analyser chaque dossier
+                        et identifier les marges de manœuvre réelles.
+                    </p>
+                </div>
+                <div class="card card-tint-2">
+                    <h5>Lecture Claire</h5>
+                    <p>
+                        Une analyse transparente des erreurs fréquentes et des
+                        limites de votre relation client actuelle.
+                    </p>
+                </div>
+                <div class="card card-tint-1">
+                    <h5>Vision Concrète</h5>
+                    <p>
+                        Des outils pensés pour les situations sensibles, alliant
+                        clarté et crédibilité dans la gestion des litiges.
+                    </p>
+                </div>
+                <div class="card card-tint-2">
+                    <h5>Protection Client</h5>
+                    <p>
+                        Des solutions conçues pour protéger la relation client et
+                        prévenir les départs évitables.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <div class="container">
+            <h2>Nos Services</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Playbook Relation Client</h3>
+                    <p>
+                        Optimisez vos interactions avec les assureurs grâce à une
+                        méthodologie structurée. Le guide essentiel pour les courtiers
+                        B2B souhaitant professionnaliser leur gestion client.
+                    </p>
+                    <a class="btn" href="#">Découvrir le Playbook</a>
+                </div>
+                <div class="card">
+                    <h3>Audit &amp; Résolution Litiges Client</h3>
+                    <p>
+                        Débloquez les dossiers sensibles et réduisez les délais de
+                        résolution. Une expertise dédiée aux litiges complexes pour
+                        sécuriser votre portefeuille de courtiers.
+                    </p>
+                    <a class="btn" href="#">Démarrer l'audit</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Contact</h2>
+            <p>Une question, une demande d'information ? Écrivez-nous directement.</p>
+            <p><a href="mailto:calyx-solution@proton.me">calyx-solution@proton.me</a></p>
+        </div>
+    </section>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inscription | Calyx Solution Client</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+<body>
+
+<main>
+    <section class="section">
+        <div class="container" style="max-width: 480px;">
+            <h2 class="text-center">Créer un compte</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages" style="margin-bottom: 20px;">
+                {% for category, message in messages %}
+                <p class="text-small"
+                   style="
+                                   padding: 12px 16px;
+                                   border-radius: 6px;
+                                   margin: 0 0 8px;
+                                   {% if category == 'error' %}
+                                       background: #fdecea;
+                                       color: #c0392b;
+                                   {% else %}
+                                       background: #e9ecfb;
+                                       color: #2b4fe4;
+                                   {% endif %}
+                               ">
+                    {{ message }}
+                </p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('register') }}" method="POST" novalidate>
+
+                <div class="grid grid-2" style="gap: 16px;">
+                    <div class="form-group">
+                        <label for="first_name">Prénom</label>
+                        <input
+                                type="text"
+                                id="first_name"
+                                name="first_name"
+                                required
+                                placeholder="Jean"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Nom</label>
+                        <input
+                                type="text"
+                                id="last_name"
+                                name="last_name"
+                                required
+                                placeholder="Dupont"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Adresse email</label>
+                    <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            placeholder="vous@exemple.com"
+                            autocomplete="username"
+                    >
+                    <p class="text-small" id="email-error" style="color: #c0392b; display: none;">
+                        Merci de saisir une adresse email valide.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            minlength="8"
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}"
+                            placeholder="••••••••"
+                            autocomplete="new-password"
+                    >
+                    <p class="text-small" id="password-error" style="color: #c0392b; display: none;">
+                        8 caractères minimum, avec au moins une majuscule,
+                        une minuscule, un chiffre et un caractère spécial.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirmer le mot de passe</label>
+                    <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            required
+                            placeholder="••••••••"
+                            autocomplete="new-password"
+                    >
+                    <p class="text-small" id="confirm-password-error" style="color: #c0392b; display: none;">
+                        Les mots de passe ne correspondent pas.
+                    </p>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%;">Créer mon compte</button>
+
+            </form>
+        </div>
+    </section>
+</main>
+
+<script>
+    const form = document.querySelector("form");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmInput = document.getElementById("confirm_password");
+
+    const emailError = document.getElementById("email-error");
+    const passwordError = document.getElementById("password-error");
+    const confirmError = document.getElementById("confirm-password-error");
+
+    function validateEmail() {
+        const valid = emailInput.checkValidity();
+        emailError.style.display = valid ? "none" : "block";
+        return valid;
+    }
+
+    function validatePassword() {
+        const valid = passwordInput.checkValidity();
+        passwordError.style.display = valid ? "none" : "block";
+        return valid;
+    }
+
+    function validateConfirmPassword() {
+        const valid = confirmInput.value === passwordInput.value && confirmInput.value !== "";
+        confirmError.style.display = valid ? "none" : "block";
+        return valid;
+    }
+
+    emailInput.addEventListener("blur", validateEmail);
+    passwordInput.addEventListener("blur", validatePassword);
+    confirmInput.addEventListener("blur", validateConfirmPassword);
+
+    form.addEventListener("submit", function (e) {
+        const emailValid = validateEmail();
+        const passwordValid = validatePassword();
+        const confirmValid = validateConfirmPassword();
+        if (!emailValid || !passwordValid || !confirmValid) {
+            e.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>
