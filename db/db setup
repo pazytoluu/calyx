@@ -1,0 +1,8 @@
+docker run -d --name calyx -p 1521:1521 -e ORACLE_PASSWORD=P@zytolu2003 -v oracle-data:/opt/oracle/oradata gvenzl/oracle-free:latest
+
+conneixon sysdba
+docker exec -it calyx sqlplus / as sysdba
+
+    docker exec -it calyx sqlplus superuser/superpwd@localhost:1521/FREEPDB1 @C:/Users/elmeh/OneDrive/Bureau/Calyx/db/tables.sql
+
+    CREATE USER superuser IDENTIFIED BY superpwd;
