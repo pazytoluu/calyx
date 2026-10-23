@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mon Profil | Calyx Solution Client</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="brand">
+            <h1 class="logo">calyx</h1>
+            <p class="tagline">solutions client pour courtiers d'assurance</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="{{ url_for('index') }}">Accueil</a></li>
+                <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="section">
+        <div class="container" style="max-width: 640px;">
+            <h2>Mon Profil</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div style="margin-bottom: 20px;">
+                {% for category, message in messages %}
+                <p class="text-small" style="padding: 12px 16px; border-radius: 6px; margin: 0 0 8px;
+                    {% if category == 'error' %}background:#fdecea;color:#c0392b;
+                    {% else %}background:#e9ecfb;color:#2b4fe4;{% endif %}">
+                    {{ message }}
+                </p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <div class="card" style="margin-bottom: 24px;">
+                <h3>Informations personnelles</h3>
+                <table style="width:100%; border-collapse:collapse; margin-top:12px;">
+                    <tr><td style="padding:8px 0; color:#666; width:40%;">Prénom</td><td>{{ user.first_name }}</td></tr>
+                    <tr><td style="padding:8px 0; color:#666;">Nom</td><td>{{ user.last_name }}</td></tr>
+                    <tr><td style="padding:8px 0; color:#666;">Email</td><td>{{ user.email }}</td></tr>
+                    <tr><td style="padding:8px 0; color:#666;">Rôle</td><td>{{ user.role }}</td></tr>
+                    <tr><td style="padding:8px 0; color:#666;">Membre depuis</td><td>{{ user.created_at.strftime('%d/%m/%Y') }}</td></tr>
+                    <tr><td style="padding:8px 0; color:#666;">Statut</td>
+                        <td>{{ 'Actif' if user.is_active_account else 'Désactivé' }}</td></tr>
+                </table>
+            </div>
+
+            {% if profile %}
+            <div class="card">
+                <h3>Coordonnées</h3>
+                <table style="width:100%; border-collapse:collapse; margin-top:12px;">
+                    <tr><td style="padding:8px 0; color:#666; width:40%;">Téléphone</td><td>{{ profile.phone }}</td></tr>
+                    <tr><td style="padding:8px 0; color:#666;">Adresse</td><td>{{ profile.address }}</td></tr>
+                    <tr><td style="padding:8px 0; color:#666;">Code postal</td><td>{{ profile.postal_code }}</td></tr>
+                    <tr><td style="padding:8px 0; color:#666;">Ville</td><td>{{ profile.city }}</td></tr>
+                    <tr><td style="padding:8px 0; color:#666;">Type d'assurance</td>
+                        <td>{{ profile.insurance_type or '—' }}</td></tr>
+                    {% if profile.broker %}
+                    <tr><td style="padding:8px 0; color:#666;">Courtier</td>
+                        <td>{{ profile.broker.company_name }}</td></tr>
+                    {% endif %}
+                </table>
+            </div>
+            {% endif %}
+
+        </div>
+    </section>
+    
+    <section id="services" class="section">
+        <div class="container">
+            <h2>Nos Services</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Playbook Relation Client</h3>
+                    <p>
+                        Optimisez vos interactions avec les assureurs grâce à une
+                        méthodologie structurée. Le guide essentiel pour les courtiers
+                        B2B souhaitant professionnaliser leur gestion client.
+                    </p>
+                    <a class="btn" href="{{ url_for('book') }}">Découvrir le Playbook</a>
+                </div>
+                <div class="card">
+                    <h3>Audit &amp; Résolution Litiges Client</h3>
+                    <p>
+                        Débloquez les dossiers sensibles et réduisez les délais de
+                        résolution. Une expertise dédiée aux litiges complexes pour
+                        sécuriser votre portefeuille de courtiers.
+                    </p>
+                    <a class="btn" href="#">Démarrer l'audit</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>

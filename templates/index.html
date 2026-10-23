@@ -16,11 +16,11 @@
         </div>
         <nav class="main-nav">
             <ul>
-                <li><a href="{{ / }}#presentation">Présentation</a></li>
-                <li><a href="{{ / }}#services">Services</a></li>
-                <li><a href="{{ / }}#contact">Contact</a></li>
-                <li><a href="{{ /connexion }}">Connexion</a></li>
-                <li><a href="{{/inscription }}">Inscription</a></li>
+                <li><a href="{{ url_for('index') }}#presentation">Présentation</a></li>
+                <li><a href="{{ url_for('index') }}#services">Services</a></li>
+                <li><a href="{{ url_for('index') }}#contact">Contact</a></li>
+                <li><a href="{{ url_for('login') }}">Connexion</a></li>
+                <li><a href="{{ url_for('register') }}">Inscription</a></li>
             </ul>
         </nav>
     </div> 
@@ -82,7 +82,7 @@
                         méthodologie structurée. Le guide essentiel pour les courtiers
                         B2B souhaitant professionnaliser leur gestion client.
                     </p>
-                    <a class="btn" href="#">Découvrir le Playbook</a>
+                    <a class="btn" href="{{ url_for('book') }}">Découvrir le Playbook</a>
                 </div>
                 <div class="card">
                     <h3>Audit &amp; Résolution Litiges Client</h3>
@@ -91,7 +91,7 @@
                         résolution. Une expertise dédiée aux litiges complexes pour
                         sécuriser votre portefeuille de courtiers.
                     </p>
-                    <a class="btn" href="#">Démarrer l'audit</a>
+                    <a class="btn" href="{{ url_for('audit_offer') }}">Démarrer l'audit</a>
                 </div>
             </div>
         </div>

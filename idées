@@ -1,0 +1,8 @@
+- pour créer un utilisateur de type brooker il faut avoir le pouvoir super user
+- le brooker a le droit de voir toutes les commandes des clients
+- le client peut soit acheter le guide soit soliciter le service (dans les deux cas il faut s'inscrire)
+- implémenter le payement il faut chercher un API et voir comment ça fonctionne
+- implémenter la connexion par google (oauth)
+
+login : calyxboss@gmail.com
+password : Admin@2026Calyx
